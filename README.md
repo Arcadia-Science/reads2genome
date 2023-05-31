@@ -1,23 +1,49 @@
-# Template repository for creating new Nextflow pipelines
+# elizabethmcd/reads2genome
 
-This GitHub [template repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/creating-a-repository-from-a-template) can be used to create a new repository with the skeleton of a [Nextflow](https://www.nextflow.io/) pipeline, based on the [nextflow-template](https://github.com/Arcadia-Science/nextflow-template) cookiecutter repository.
+<!-- TODO: Update these based on your pipeline's supported platforms -->
 
-Once you create a repository using this template, your new repository will execute a GitHub Actions workflow that uses cookiecutter to rewrite the repository to the desired state. This may take 30 seconds or so.
+[![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A521.10.3-23aa62.svg)](https://www.nextflow.io/)
+[![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
+[![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
+[![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
+[![Launch on Nextflow Tower](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Nextflow%20Tower-%234256e7)](https://tower.nf/launch?pipeline=https://github.com/elizabethmcd/reads2genome)
 
-Once the action is done, please rename the `github` directory to `.github`. This is a short-term hack to circumvent GitHub action permission issues.
+## Introduction
 
-The GitHub action will also create a `TEMPLATE` branch that's used by `nf-core` to keep modules up-to-date and make following the `nf-core` guidelines easier.
+<!-- TODO: Write a 1-2 sentence summary of what data the pipeline is for and what it does -->
 
-## Credit
+**elizabethmcd/reads2genome** is QC and assemble reads from different sequencing technologies into a genome obtained from a single organism.
 
-This is fully inspired by the following blog post: https://simonwillison.net/2021/Aug/28/dynamic-github-repository-templates/. The README instructions here are modified from [this GitHub repository](https://github.com/simonw/click-app-template-repository).
+The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from [nf-core/modules](https://github.com/nf-core/modules) in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!
 
-## Usage
+<!-- TODO: Add full-sized test dataset and amend the paragraph below if applicable -->
 
-You can click on the "Use this template" button on this repository and follow the prompts. Alternatively, you can start [here](https://github.com/Arcadia-Science/nextflow-template-repository/generate) and follow the prompts. Please follow these instructions:
+## Pipeline summary
 
-- The name of your repository will be the name of the Nextflow pipeline.
-- Add a one-line description of your pipeline.
-- Finally, click "Create repository from template".
+<!-- TODO: Fill in short bullet-pointed list of the default steps in the pipeline -->
 
-![Example usage when using the template](./template.png)
+## Quick start
+
+<!-- TODO: Fill in short bullet-pointed list of the default steps to get the pipeline up and running -->
+
+## Full documentation
+
+<!-- TODO: Fill in this section with how to fully use the pipeline, what the inputs are and what the outputs look like. If this section ends up being super long, feel free to create a new docs/ directory and add details there. -->
+
+## Contributions and support
+
+<!-- TODO: Add CONTRIBUTING.MD that is specific to Elizabeth McDaniel -->
+
+## Citations
+
+<!-- TODO: Add bibliography of tools and data used in your pipeline -->
+
+This cookiecutter template is based off of the `nf-core` template. You can cite the `nf-core` publication as follows:
+
+> **The nf-core framework for community-curated bioinformatics pipelines.**
+>
+> Philip Ewels, Alexander Peltzer, Sven Fillinger, Harshil Patel, Johannes Alneberg, Andreas Wilm, Maxime Ulysse Garcia, Paolo Di Tommaso & Sven Nahnsen.
+>
+> _Nat Biotechnol._ 2020 Feb 13. doi: [10.1038/s41587-020-0439-x](https://dx.doi.org/10.1038/s41587-020-0439-x).
+
+An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
