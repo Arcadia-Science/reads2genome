@@ -1,5 +1,5 @@
 //
-// This file holds several functions specific to the main.nf workflow in the elizabethmcd/reads2genome pipeline
+// This file holds several functions specific to the main.nf workflow in the ArcadiaScience/reads2genome pipeline
 //
 
 class WorkflowMain {

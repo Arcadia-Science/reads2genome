@@ -1,8 +1,8 @@
 // TODO: Update the description
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/elizabethmcd/reads2genome/main/nextflow_schema.json",
-    "title": "elizabethmcd/reads2genome pipeline parameters",
+    "$id": "https://raw.githubusercontent.com/ArcadiaScience/reads2genome/main/nextflow_schema.json",
+    "title": "ArcadiaScience/reads2genome pipeline parameters",
     "description": "QC and assemble reads from different sequencing technologies into a genome obtained from a single organism",
     "type": "object",
     "definitions": {

@@ -1,4 +1,4 @@
-# elizabethmcd/reads2genome: Citations
+# arcadiascience/reads2genome: Citations
 
 ## [nf-core](https://pubmed.ncbi.nlm.nih.gov/32055031/)
 

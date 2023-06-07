@@ -1,5 +1,5 @@
 name: Feature request
-description: Suggest an idea for the elizabethmcd/reads2genome pipeline
+description: Suggest an idea for the ArcadiaScience/reads2genome pipeline
 labels: enhancement
 body:
   - type: textarea

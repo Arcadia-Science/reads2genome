@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Before you post this issue, please check the [documentation](https://github.com/elizabethmcd/reads2genome).
+        Before you post this issue, please check the [documentation](https://github.com/ArcadiaScience/reads2genome).
 
   - type: textarea
     id: description
@@ -44,4 +44,4 @@ body:
         * Executor _(eg. slurm, local, awsbatch)_
         * Container engine: _(e.g. Docker, Singularity, Conda)_
         * OS _(eg. CentOS Linux, macOS, Linux Mint)_
-        * Version of elizabethmcd/reads2genome _(eg. 1.1, 1.5, 1.8.2)_
+        * Version of ArcadiaScience/reads2genome _(eg. 1.1, 1.5, 1.8.2)_

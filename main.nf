@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    elizabethmcd/reads2genome
+    ArcadiaScience/reads2genome
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/elizabethmcd/reads2genome
+    Github : https://github.com/ArcadiaScience/reads2genome
 ----------------------------------------------------------------------------------------
 */
 
@@ -26,9 +26,9 @@ WorkflowMain.initialize(workflow, params, log)
 include { READS2GENOME } from './workflows/reads2genome'
 
 //
-// WORKFLOW: Run main elizabethmcd/reads2genome analysis pipeline
+// WORKFLOW: Run main ArcadiaScience/reads2genome analysis pipeline
 //
-workflow NFCORE_READS2GENOME {
+workflow ArcadiaScience_READS2GENOME {
     READS2GENOME ()
 }
 
@@ -43,7 +43,7 @@ workflow NFCORE_READS2GENOME {
 // See: https://github.com/nf-core/rnaseq/issues/619
 //
 workflow {
-    NFCORE_READS2GENOME ()
+    ArcadiaScience_READS2GENOME ()
 }
 
 /*

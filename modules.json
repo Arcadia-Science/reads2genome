@@ -1,6 +1,6 @@
 {
-    "name": "elizabethmcd/reads2genome",
-    "homePage": "https://github.com/elizabethmcd/reads2genome",
+    "name": "ArcadiaScience/reads2genome",
+    "homePage": "https://github.com/ArcadiaScience/reads2genome",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
