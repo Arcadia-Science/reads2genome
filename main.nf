@@ -16,20 +16,22 @@ nextflow.enable.dsl = 2
 */
 
 WorkflowMain.initialize(workflow, params, log)
+if (params.platform == 'illumina') {
+    include { ILLUMINA } from './workflows/illumina'
+} else if (params.platform == 'nanopore') {
+    include { NANOPORE } from './workflows/nanopore'
+} else if (params.plaform == 'pacbio') {
+    include { PACBIO } from './workflows/pacbio'
+}
 
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NAMED WORKFLOW FOR PIPELINE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-include { READS2GENOME } from './workflows/reads2genome'
-
-//
-// WORKFLOW: Run main ArcadiaScience/reads2genome analysis pipeline
-//
-workflow ArcadiaScience_READS2GENOME {
-    READS2GENOME ()
+workflow ARCADIASCIENCE_READS2GENOME {
+    if (params.platform == 'illumina') {
+        ILLUMINA()
+    } else if (params.platform == 'nanopore') {
+        NANOPORE()
+    } else if (params.platform == 'pacbio') {
+        PACBIO()
+    }
 }
 
 /*
