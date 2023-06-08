@@ -19,10 +19,10 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input sample
     CONFIG FILES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-ch_multiqc_config                     = Channel.fromPath("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
+ch_multiqc_config                     = Channel.fromPath("$projectDir/assets/illumina_multiqc_config.yml", checkIfExists: true)
 ch_multiqc_custom_config              = params.multiqc_config ? Channel.fromPath( params.multiqc_config, checkIfExists: true ) : Channel.empty()
 ch_multiqc_logo                       = params.multiqc_logo  ? Channel.fromPath( params.multiqc_logo, checkIfExists: true ): Channel.empty()
-ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
+ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("$projectDir/assets/illumina_methods_description_template.yml", checkIfExists: true)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,7 +61,7 @@ workflow ILLUMINA {
     // adapter removal and QC
     FASTP (
         ch_reads,
-        params.fastp_save_trimmed_Fail,
+        params.fastp_save_trimmed_fail,
         []
     )
     ch_qced_reads = FASTP.out.reads
@@ -71,12 +71,12 @@ workflow ILLUMINA {
     SPADES (
         ch_qced_reads
     )
-    ch_assemblies = SPADES.out.assembly
+    ch_assemblies = SPADES.out.contigs
     ch_versions = ch_versions.mix(SPADES.out.versions)
 
     // QUAST on assemblies
     QUAST (
-        ch_assemblies.map{it -> it[1].collect()}
+        ch_assemblies.map{it -> it[1]}.collect()
     )
     ch_versions = ch_versions.mix(QUAST.out.versions)
 

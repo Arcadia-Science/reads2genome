@@ -12,9 +12,7 @@ process NANOPLOT {
 
     output:
     path "${prefix}", type: 'dir'                  , emit: qc
-    path("*.html")                                 , emit: html
     path("*.txt")                                  , emit: txt
-    tuple val(meta), path("*.log")                 , emit: log
     path  "versions.yml"                           , emit: versions
 
     when:

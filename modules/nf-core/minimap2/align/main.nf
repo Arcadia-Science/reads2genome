@@ -31,7 +31,7 @@ process MINIMAP2_ALIGN {
         $reads | \\
         samtools view -@ $task.cpus -bS | \\
         samtools sort -@ $task.cpus -o ${prefix}.sorted.bam
-    samtools index ${prefix}.sorted.bam.bai
+    samtools index ${prefix}.sorted.bam ${prefix}.sorted.bam.bai
 
 
     cat <<-END_VERSIONS > versions.yml

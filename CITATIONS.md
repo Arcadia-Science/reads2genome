@@ -1,4 +1,4 @@
-# ArcadiaScience/reads2genome: Citations
+# Arcadia-Science/reads2genome: Citations
 
 ## [nf-core](https://pubmed.ncbi.nlm.nih.gov/32055031/)
 

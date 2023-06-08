@@ -19,10 +19,10 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input sample
     CONFIG FILES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-ch_multiqc_config                     = Channel.fromPath("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
+ch_multiqc_config                     = Channel.fromPath("$projectDir/assets/pacbio_multiqc_config.yml", checkIfExists: true)
 ch_multiqc_custom_config              = params.multiqc_config ? Channel.fromPath( params.multiqc_config, checkIfExists: true ) : Channel.empty()
 ch_multiqc_logo                       = params.multiqc_logo  ? Channel.fromPath( params.multiqc_logo, checkIfExists: true ): Channel.empty()
-ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
+ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("$projectDir/assets/pacbio_methods_description_template.yml", checkIfExists: true)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,7 +69,7 @@ workflow PACBIO {
 
     // assembly with flye
     FLYE (
-        ch_reads
+        ch_reads,
         "--pacbio-hifi"
     )
     ch_versions = ch_versions.mix(FLYE.out.versions)
@@ -93,7 +93,7 @@ workflow PACBIO {
 
     // QUAST qc on assemblies
     QUAST (
-        ch_flye_draft_assembly.map{it -> it[1].collect()}
+        ch_flye_draft_assembly.map{it -> it[1]}.collect()
     )
     ch_versions = ch_versions.mix(QUAST.out.versions)
 

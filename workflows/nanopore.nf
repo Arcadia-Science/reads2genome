@@ -19,10 +19,10 @@ if (params.input) { ch_input = file(params.input) } else { exit 1, 'Input sample
     CONFIG FILES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-ch_multiqc_config                     = Channel.fromPath("$projectDir/assets/multiqc_config.yml", checkIfExists: true)
+ch_multiqc_config                     = Channel.fromPath("$projectDir/assets/nanopore_multiqc_config.yml", checkIfExists: true)
 ch_multiqc_custom_config              = params.multiqc_config ? Channel.fromPath( params.multiqc_config, checkIfExists: true ) : Channel.empty()
 ch_multiqc_logo                       = params.multiqc_logo  ? Channel.fromPath( params.multiqc_logo, checkIfExists: true ): Channel.empty()
-ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("$projectDir/assets/methods_description_template.yml", checkIfExists: true)
+ch_multiqc_custom_methods_description = params.multiqc_methods_description ? file(params.multiqc_methods_description, checkIfExists: true) : file("$projectDir/assets/nanopore_methods_description_template.yml", checkIfExists: true)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,12 +72,12 @@ workflow NANOPORE {
     PORECHOP_ABI (
         ch_reads
     )
-    ch_qced_reads = PORECHOP_API.out.reads
+    ch_qced_reads = PORECHOP_ABI.out.reads
     ch_versions = ch_versions.mix(PORECHOP_ABI.out.versions)
 
     // assembly with flye
     FLYE (
-        ch_qced_reads
+        ch_qced_reads,
         "--nano-hq"
     )
     ch_versions = ch_versions.mix(FLYE.out.versions)
@@ -108,7 +108,7 @@ workflow NANOPORE {
 
     // QUAST qc on assemblies
     QUAST (
-        ch_polished_assembly.map{it -> it[1].collect()}
+        ch_polished_assembly.map{it -> it[1]}.collect()
     )
     ch_versions = ch_versions.mix(QUAST.out.versions)
 

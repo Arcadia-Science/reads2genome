@@ -4,15 +4,15 @@
   |\\ | |__  __ /  ` /  \\ |__) |__         }  {
   | \\| |       \\__, \\__/ |  \\ |___     \\`-._,-`-,
                                         `._,._,'
-  ArcadiaScience/reads2genome v${version}
+  Arcadia-Science/reads2genome v${version}
 ----------------------------------------------------
 Run Name: $runName
 
 <% if (success){
-    out << "## ArcadiaScience/reads2genome execution completed successfully! ##"
+    out << "## Arcadia-Science/reads2genome execution completed successfully! ##"
 } else {
     out << """####################################################
-## ArcadiaScience/reads2genome execution completed unsuccessfully! ##
+## Arcadia-Science/reads2genome execution completed unsuccessfully! ##
 ####################################################
 The exit status of the task that caused the workflow execution to fail was: $exitStatus.
 The full error message was:
@@ -35,5 +35,5 @@ Pipeline Configuration:
 <% out << summary.collect{ k,v -> " - $k: $v" }.join("\n") %>
 
 --
-ArcadiaScience/reads2genome
-https://github.com/ArcadiaScience/reads2genome
+Arcadia-Science/reads2genome
+https://github.com/Arcadia-Science/reads2genome

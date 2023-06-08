@@ -2,10 +2,12 @@ process PORECHOP_ABI {
     tag "$meta.id"
     label 'process_medium'
 
+    // changed biocontainer tag to updated version
+
     conda "bioconda::porechop_abi=0.5.0"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/porechop_abi:0.5.0--py310h590eda1_0':
-        'biocontainers/porechop_abi:0.5.0--py310h590eda1_0' }"
+        'https://depot.galaxyproject.org/singularity/porechop_abi:0.5.0--py38he0f268d_2':
+        'biocontainers/porechop_abi:0.5.0--py38he0f268d_2' }"
 
     input:
     tuple val(meta), path(reads)

@@ -12,8 +12,8 @@ process QUAST {
     path("*")
 
     output:
-    patn "QUAST/*", type: 'dir'     , emit: qc
-    path '*.tsv'                    , emit: tsv
+    path "QUAST/*", type: 'dir'     , emit: qc
+    path '*.tsv'                    , emit: results
     path "versions.yml"             , emit: versions
 
     when:
@@ -22,8 +22,7 @@ process QUAST {
     script:
     def args = task.ext.args   ?: ''
     prefix   = task.ext.prefix ?: 'quast'
-    def features  = use_gff ? "--features $gff" : ''
-    def reference = use_fasta ? "-r $fasta" : ''
+
     """
     quast.py \\
         --output-dir QUAST \\

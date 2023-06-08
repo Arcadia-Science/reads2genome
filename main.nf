@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    ArcadiaScience/reads2genome
+    Arcadia-Science/reads2genome
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/ArcadiaScience/reads2genome
+    Github : https://github.com/Arcadia-Science/reads2genome
 ----------------------------------------------------------------------------------------
 */
 
@@ -20,7 +20,7 @@ if (params.platform == 'illumina') {
     include { ILLUMINA } from './workflows/illumina'
 } else if (params.platform == 'nanopore') {
     include { NANOPORE } from './workflows/nanopore'
-} else if (params.plaform == 'pacbio') {
+} else if (params.platform == 'pacbio') {
     include { PACBIO } from './workflows/pacbio'
 }
 
@@ -45,7 +45,7 @@ workflow ARCADIASCIENCE_READS2GENOME {
 // See: https://github.com/nf-core/rnaseq/issues/619
 //
 workflow {
-    ArcadiaScience_READS2GENOME ()
+    ARCADIASCIENCE_READS2GENOME ()
 }
 
 /*

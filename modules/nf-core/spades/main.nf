@@ -9,14 +9,10 @@ process SPADES {
 
     input:
     tuple val(meta), path(reads)
-    path yml
-    path hmm
 
     output:
-    tuple val(meta), path('*.scaffolds.fa.gz')    , optional:true, emit: scaffolds
-    tuple val(meta), path('*.contigs.fa.gz')      , optional:true, emit: contigs
-    tuple val(meta), path('*.transcripts.fa.gz')  , optional:true, emit: transcripts
-    tuple val(meta), path('*.gene_clusters.fa.gz'), optional:true, emit: gene_clusters
+    tuple val(meta), path('*.scaffolds.fasta.gz')    , emit: scaffolds
+    tuple val(meta), path('*.contigs.fasta.gz')      , emit: contigs
     tuple val(meta), path('*.assembly.gfa.gz')    , optional:true, emit: gfa
     tuple val(meta), path('*.log')                , emit: log
     path  "versions.yml"                          , emit: versions
@@ -36,7 +32,7 @@ process SPADES {
         --pe1-1 ${reads[0]} \\
         --pe1-2 ${reads[1]} \\
         -o spades
-    mv spades.log ${prefix}.spades.log
+    mv spades/spades.log ${prefix}.spades.log
 
     mv spades/scaffolds.fasta ${prefix}.spades.scaffolds.fasta
     mv spades/contigs.fasta ${prefix}.spades.contigs.fasta
