@@ -8,12 +8,12 @@ process NANOPLOT {
         'biocontainers/nanoplot:1.41.0--pyhdfd78af_0' }"
 
     input:
-    tuple val(meta), path(ontfile)
+    tuple val(meta), path(fastq)
 
     output:
-    tuple val(meta), path("*.html")                , emit: html
-    tuple val(meta), path("*.png") , optional: true, emit: png
-    tuple val(meta), path("*.txt")                 , emit: txt
+    path "${prefix}", type: 'dir'                  , emit: qc
+    path("*.html")                                 , emit: html
+    path("*.txt")                                  , emit: txt
     tuple val(meta), path("*.log")                 , emit: log
     path  "versions.yml"                           , emit: versions
 
@@ -22,13 +22,14 @@ process NANOPLOT {
 
     script:
     def args = task.ext.args ?: ''
-    def input_file = ("$ontfile".endsWith(".fastq.gz")) ? "--fastq ${ontfile}" :
-        ("$ontfile".endsWith(".txt")) ? "--summary ${ontfile}" : ''
+    prefix = task.ext.prefix ?: "${meta.id}"
     """
     NanoPlot \\
-        $args \\
-        -t $task.cpus \\
-        $input_file
+        $args $fastq \\
+        -t $task.cpus -o $prefix
+    mv ${prefix}/NanoStats.txt ${prefix}_nanoplot_stats.txt
+
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         nanoplot: \$(echo \$(NanoPlot --version 2>&1) | sed 's/^.*NanoPlot //; s/ .*\$//')

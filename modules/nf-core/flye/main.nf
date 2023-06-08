@@ -1,6 +1,8 @@
 process FLYE {
     tag "$meta.id"
-    label 'process_high'
+    label 'process_high_memory'
+
+    // process high memory and modified output to include flye in output file names
 
     conda "bioconda::flye=2.9"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -37,10 +39,10 @@ process FLYE {
         $task.cpus \\
         $args
 
-    gzip -c assembly.fasta > ${prefix}.assembly.fasta.gz
-    gzip -c assembly_graph.gfa > ${prefix}.assembly_graph.gfa.gz
-    gzip -c assembly_graph.gv > ${prefix}.assembly_graph.gv.gz
-    mv assembly_info.txt ${prefix}.assembly_info.txt
+    gzip -c assembly.fasta > ${prefix}.flye.assembly.fasta.gz
+    gzip -c assembly_graph.gfa > ${prefix}.flye.assembly_graph.gfa.gz
+    gzip -c assembly_graph.gv > ${prefix}.flye.assembly_graph.gv.gz
+    mv assembly_info.txt ${prefix}.flye.assembly_info.txt
     mv flye.log ${prefix}.flye.log
     mv params.json ${prefix}.params.json
 
@@ -53,10 +55,10 @@ process FLYE {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    echo stub > assembly.fasta | gzip -c assembly.fasta > ${prefix}.assembly.fasta.gz
-    echo stub > assembly_graph.gfa | gzip -c assembly_graph.gfa > ${prefix}.assembly_graph.gfa.gz
-    echo stub > assembly_graph.gv | gzip -c assembly_graph.gv > ${prefix}.assembly_graph.gv.gz
-    echo contig_1 > ${prefix}.assembly_info.txt
+    echo stub > assembly.fasta | gzip -c assembly.fasta > ${prefix}.flye.assembly.fasta.gz
+    echo stub > assembly_graph.gfa | gzip -c assembly_graph.gfa > ${prefix}.flye.assembly_graph.gfa.gz
+    echo stub > assembly_graph.gv | gzip -c assembly_graph.gv > ${prefix}.flye.assembly_graph.gv.gz
+    echo contig_1 > ${prefix}.flye.assembly_info.txt
     echo stub > ${prefix}.flye.log
     echo stub > ${prefix}.params.json
 

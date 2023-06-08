@@ -2,6 +2,8 @@ process MEDAKA {
     tag "$meta.id"
     label 'process_high'
 
+    // add gunzip command because won't take in .gz fasta files
+
     conda "bioconda::medaka=1.4.4"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/medaka:1.4.4--py38h130def0_0' :
@@ -21,16 +23,17 @@ process MEDAKA {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
+    gunzip -c $assembly > ${prefix}_unzipped_assembly.fa
     medaka_consensus \\
         -t $task.cpus \\
         $args \\
         -i $reads \\
-        -d $assembly \\
-        -o ./
+        -d ${prefix}_unzipped_assembly.fa \\
+        -o polishing
 
-    mv consensus.fasta ${prefix}.fa
+    mv polishing/consensus.fasta ${prefix}_polished.fasta
 
-    gzip -n ${prefix}.fa
+    gzip -n ${prefix}_polished.fasta
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

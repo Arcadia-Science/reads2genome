@@ -8,7 +8,7 @@ process SPADES {
         'biocontainers/spades:3.15.5--h95f258a_1' }"
 
     input:
-    tuple val(meta), path(illumina), path(pacbio), path(nanopore)
+    tuple val(meta), path(reads)
     path yml
     path hmm
 
@@ -28,20 +28,23 @@ process SPADES {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def maxmem = task.memory.toGiga()
-    def illumina_reads = illumina ? ( meta.single_end ? "-s $illumina" : "-1 ${illumina[0]} -2 ${illumina[1]}" ) : ""
-    def pacbio_reads = pacbio ? "--pacbio $pacbio" : ""
-    def nanopore_reads = nanopore ? "--nanopore $nanopore" : ""
-    def custom_hmms = hmm ? "--custom-hmms $hmm" : ""
-    def reads = yml ? "--dataset $yml" : "$illumina_reads $pacbio_reads $nanopore_reads"
     """
     spades.py \\
         $args \\
         --threads $task.cpus \\
         --memory $maxmem \\
-        $custom_hmms \\
-        $reads \\
-        -o ./
+        --pe1-1 ${reads[0]} \\
+        --pe1-2 ${reads[1]} \\
+        -o spades
     mv spades.log ${prefix}.spades.log
+
+    mv spades/scaffolds.fasta ${prefix}.spades.scaffolds.fasta
+    mv spades/contigs.fasta ${prefix}.spades.contigs.fasta
+    mv spades/assembly_graph_with_scaffolds.gfa ${prefix}.spades.assembly.graph.fa
+
+    gzip "${prefix}.spades.scaffolds.fasta"
+    gzip "${prefix}.spades.contigs.fasta"
+    gzip "${prefix}.spades.assembly.graph.fa"
 
     if [ -f scaffolds.fasta ]; then
         mv scaffolds.fasta ${prefix}.scaffolds.fa

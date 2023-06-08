@@ -30,6 +30,7 @@ ch_multiqc_custom_methods_description = params.multiqc_methods_description ? fil
     IMPORT LOCAL MODULES/SUBWORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
+include { INPUT_CHECK                                       } from '../subworkflows/local/input_check'
 include { MAPPING                                           } from '../subworkflows/local/mapping'
 
 /*

@@ -1,22 +1,20 @@
 process QUAST {
     label 'process_medium'
 
+    // modifies input and output directory handling
+
     conda "bioconda::quast=5.2.0"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/quast:5.2.0--py39pl5321h2add14b_1' :
         'biocontainers/quast:5.2.0--py39pl5321h2add14b_1' }"
 
     input:
-    path consensus
-    path fasta
-    path gff
-    val use_fasta
-    val use_gff
+    path("*")
 
     output:
-    path "${prefix}"    , emit: results
-    path '*.tsv'        , emit: tsv
-    path "versions.yml" , emit: versions
+    patn "QUAST/*", type: 'dir'     , emit: qc
+    path '*.tsv'                    , emit: tsv
+    path "versions.yml"             , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -28,14 +26,12 @@ process QUAST {
     def reference = use_fasta ? "-r $fasta" : ''
     """
     quast.py \\
-        --output-dir $prefix \\
-        $reference \\
-        $features \\
+        --output-dir QUAST \\
+        *.fasta.gz \\
         --threads $task.cpus \\
-        $args \\
-        ${consensus.join(' ')}
+        $args
 
-    ln -s ${prefix}/report.tsv
+    ln -s QUAST/report.tsv
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
