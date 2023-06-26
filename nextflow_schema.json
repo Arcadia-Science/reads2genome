@@ -13,15 +13,15 @@
             "properties": {
                 "input": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "outdir": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "platform": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 }
             },
             "required": ["input", "outdir", "platform"]
@@ -34,7 +34,7 @@
             "properties": {
                 "lineage": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "mode": {
                     "type": "string",
@@ -172,19 +172,19 @@
             "properties": {
                 "multiqc_title": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "multiqc_methods_description": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "multiqc_logo": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "multiqc_config": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "max_multiqc_email_size": {
                     "type": "string",
@@ -220,7 +220,7 @@
         },
         "hook_url": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "custom_config_version": {
             "type": "string",
@@ -232,17 +232,21 @@
         },
         "config_profile_description": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "config_profile_contact": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "config_profile_url": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "config_profile_name": {
+            "type": "string",
+            "default": "None"
+        },
+        "from_email": {
             "type": "string",
             "default": null
         }
