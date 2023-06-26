@@ -32,8 +32,8 @@ jobs:
         run: |
           nextflow run ${GITHUB_WORKSPACE} -profile test_illumina,docker --outdir ./results_illumina
 
-test_nanopore:
-    name: Run Nanopore pipeline with test data
+  test_nanopore:
+    name: Run Nanpore pipeline with test data
     # Only run on push if this is the nf-core dev branch (merged PRs)
     if: "${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository == 'Arcadia-Science/reads2genome') }}"
     runs-on: ubuntu-latest
@@ -55,7 +55,7 @@ test_nanopore:
         run: |
           nextflow run ${GITHUB_WORKSPACE} -profile test_nanopore,docker --outdir ./results_illumina
 
-test_pacbio:
+  test_pacbio:
     name: Run PacBio pipeline with test data
     # Only run on push if this is the nf-core dev branch (merged PRs)
     if: "${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository == 'Arcadia-Science/reads2genome') }}"

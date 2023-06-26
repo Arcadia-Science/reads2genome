@@ -4,15 +4,19 @@
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
+
 ## Introduction
 
 **Arcadia-Science/reads2genome** is a pipeline that performs QC checks and assembly on reads from different sequencing technologies obtained from a single organism. The pipeline produces a draft assembly and several statistics for assessing quality.
 
 The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool to run tasks across multiple compute infrastructures in a very portable manner. It uses Docker/Singularity containers making installation trivial and results highly reproducible. The [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl2.html) implementation of this pipeline uses one container per process which makes it much easier to maintain and update software dependencies. Where possible, these processes have been submitted to and installed from [nf-core/modules](https://github.com/nf-core/modules) in order to make them available to all nf-core pipelines, and to everyone within the Nextflow community!
+
 ## Pipeline summary
+
 The workflow supports reads in `.fastq` format from either Illumina, Nanopore, or Pacbio technologies. Assemblies are produced from the reads and assembly statistics summarized with `QUAST`, reads mapped back to the assembly and mapping statistics produced with `samtools stat` and lineage-specific QC statistics produced with `BUSCO`. The workflow then reports these QC stats into an HTML report produced with `MultiQC`.
 
 ## Quick start
+
 1. Install Nextflow (>=22.10.1)
 
 2. Install Docker, Singularity (you can follow this tutorial), or Conda. You can use conda to install Nextflow itself but use it for managing software within pipelines as a last resort. We recommend using Docker if possible as this has been tested most frequently. See the nf-core docs) for more information.
@@ -22,12 +26,15 @@ The workflow supports reads in `.fastq` format from either Illumina, Nanopore, o
 ```
 nextflow run Arcadia-Science/reads2genome -profile test_illumina,YOURPROFILE --outdir <OUTDIR>
 ```
+
 ```
 nextflow run Arcadia-Science/metagenomics -profile test_nanopore,YOURPROFILE --outdir <OUTDIR>
 ```
+
 ```
 nextflow run Arcadia-Science/reads2genome -profile test_pacbio,YOURPROFILE --outdir <OUTDIR>
 ```
+
 Note that some form of configuration will be needed so that Nextflow knows how to fetch the required software. This is usually done in the form of a config profile (YOURPROFILE in the example command above). You can chain multiple config profiles in a comma-separated string.
 
 > - The pipeline comes with several config profiles, but we recommend using `docker` when possible, such as `-profile test,docker`.
@@ -36,11 +43,12 @@ Note that some form of configuration will be needed so that Nextflow knows how t
 > - If you are using `conda`, it is highly recommended to use the [`NXF_CONDA_CACHEDIR` or `conda.cacheDir`](https://www.nextflow.io/docs/latest/conda.html) settings to store the environments in a central location for future pipeline runs.
 
 4. Start running your own analysis!
-Prior to running the workflow, you will need to select a BUSCO lineage to compare against the assemblies produced in the pipeline. You can find a list of accepted BUSCO lineages [here](https://busco.ezlab.org/list_of_lineages.html).
+   Prior to running the workflow, you will need to select a BUSCO lineage to compare against the assemblies produced in the pipeline. You can find a list of accepted BUSCO lineages [here](https://busco.ezlab.org/list_of_lineages.html).
 
 ```
 nextflow run Arcadia-Science/reads2genome --input samplesheet.csv --outdir <OUTDIR> --platform <illumina|nanopore|pacbio> --lineage <BUSCO_LINEAGE> -profile <docker/singularity/conda/institute>
 ```
+
 ## Citations
 
 This cookiecutter template is based off of the `nf-core` template. You can cite the `nf-core` publication as follows:
