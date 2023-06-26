@@ -1,4 +1,4 @@
-test_*/
+test/
 .nextflow*
 work/
 data/
