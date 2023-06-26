@@ -10,7 +10,7 @@ report_section_order:
     order: -1003
   Samtools:
     order: -1004
-  "Arcadia-Science-reads2genome-pacbio-methods-description":
+  "Arcadia-Science-reads2genome-methods-description":
     order: -1005
   software_versions:
     order: -1006
