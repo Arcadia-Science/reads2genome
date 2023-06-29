@@ -19,9 +19,9 @@ process CHECK_SAMPLESHEET {
     script:
 
     """
-    check_samplesheet.py \\
+    simple_check_samplesheet.py \\
         $complete_samplesheet \\
-        complete_samplesheet.valid.csv
+        -o complete_samplesheet.valid.csv
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         python: \$(python --version | sed 's/Python //g')
