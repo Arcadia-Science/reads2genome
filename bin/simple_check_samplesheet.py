@@ -28,9 +28,7 @@ def check_samplesheet(csv_file):
             # Check file formats
             for field in ["fastq_1", "fastq_2"]:
                 value = row[field].strip()
-                if value and not (
-                    value.endswith(".fastq.gz") or value.endswith(".fq.gz")
-                ):
+                if value and not (value.endswith(".fastq.gz") or value.endswith(".fq.gz")):
                     raise AssertionError(f"Invalid fastq format")
 
             # Convert spaces to underscores for sample name
