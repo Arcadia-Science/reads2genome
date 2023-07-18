@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    elizabethmcd/reads2genome
+    Arcadia-Science/reads2genome
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/elizabethmcd/reads2genome
+    Github : https://github.com/Arcadia-Science/reads2genome
 ----------------------------------------------------------------------------------------
 */
 
@@ -16,20 +16,22 @@ nextflow.enable.dsl = 2
 */
 
 WorkflowMain.initialize(workflow, params, log)
+if (params.platform == 'illumina') {
+    include { ILLUMINA } from './workflows/illumina'
+} else if (params.platform == 'nanopore') {
+    include { NANOPORE } from './workflows/nanopore'
+} else if (params.platform == 'pacbio') {
+    include { PACBIO } from './workflows/pacbio'
+}
 
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NAMED WORKFLOW FOR PIPELINE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-include { READS2GENOME } from './workflows/reads2genome'
-
-//
-// WORKFLOW: Run main elizabethmcd/reads2genome analysis pipeline
-//
-workflow NFCORE_READS2GENOME {
-    READS2GENOME ()
+workflow ARCADIASCIENCE_READS2GENOME {
+    if (params.platform == 'illumina') {
+        ILLUMINA()
+    } else if (params.platform == 'nanopore') {
+        NANOPORE()
+    } else if (params.platform == 'pacbio') {
+        PACBIO()
+    }
 }
 
 /*
@@ -43,7 +45,7 @@ workflow NFCORE_READS2GENOME {
 // See: https://github.com/nf-core/rnaseq/issues/619
 //
 workflow {
-    NFCORE_READS2GENOME ()
+    ARCADIASCIENCE_READS2GENOME ()
 }
 
 /*

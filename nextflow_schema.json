@@ -1,17 +1,53 @@
-// TODO: Update the description
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "https://raw.githubusercontent.com/elizabethmcd/reads2genome/main/nextflow_schema.json",
-    "title": "elizabethmcd/reads2genome pipeline parameters",
+    "$id": "https://raw.githubusercontent.com/Arcadia-Science/reads2genome/main/nextflow_schema.json",
+    "title": "Arcadia-Science/reads2genome pipeline parameters",
     "description": "QC and assemble reads from different sequencing technologies into a genome obtained from a single organism",
     "type": "object",
     "definitions": {
+        "input_output_options": {
+            "title": "input_output_options",
+            "type": "object",
+            "description": "Define where the pipeline should find the input samplesheet and save results",
+            "default": "",
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "default": null
+                },
+                "outdir": {
+                    "type": "string",
+                    "default": null
+                },
+                "platform": {
+                    "type": "string",
+                    "default": null
+                }
+            },
+            "required": ["input", "outdir", "platform"]
+        },
+        "busco_options": {
+            "title": "busco_options",
+            "type": "object",
+            "description": "Select lineage and mode options for running BUSCO",
+            "default": "",
+            "properties": {
+                "lineage": {
+                    "type": "string",
+                    "default": null
+                },
+                "mode": {
+                    "type": "string",
+                    "default": "genome",
+                    "description": "Mode to run BUSCO, default is genome mode."
+                }
+            }
+        },
         "email_options": {
             "title": "Email options",
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should send an email upon completion.",
-            "required": [],
             "properties": {
                 "email": {
                     "type": "string",
@@ -127,9 +163,43 @@
                     "fa_icon": "fas fa-bacon"
                 }
             }
+        },
+        "multiqc_options": {
+            "title": "multiqc_options",
+            "type": "object",
+            "description": "Various MultiQC reporting options",
+            "default": "",
+            "properties": {
+                "multiqc_title": {
+                    "type": "string",
+                    "default": null
+                },
+                "multiqc_methods_description": {
+                    "type": "string",
+                    "default": null
+                },
+                "multiqc_logo": {
+                    "type": "string",
+                    "default": null
+                },
+                "multiqc_config": {
+                    "type": "string",
+                    "default": null
+                },
+                "max_multiqc_email_size": {
+                    "type": "string",
+                    "default": "25.MB"
+                }
+            }
         }
     },
     "allOf": [
+        {
+            "$ref": "#/definitions/input_output_options"
+        },
+        {
+            "$ref": "#/definitions/busco_options"
+        },
         {
             "$ref": "#/definitions/email_options"
         },
@@ -138,6 +208,43 @@
         },
         {
             "$ref": "#/definitions/generic_options"
+        },
+        {
+            "$ref": "#/definitions/multiqc_options"
         }
-    ]
+    ],
+    "properties": {
+        "single_end": {
+            "type": "string",
+            "default": "false"
+        },
+        "hook_url": {
+            "type": "string",
+            "default": null
+        },
+        "custom_config_version": {
+            "type": "string",
+            "default": "master"
+        },
+        "custom_config_base": {
+            "type": "string",
+            "default": "https://raw.githubusercontent.com/nf-core/configs/master"
+        },
+        "config_profile_description": {
+            "type": "string",
+            "default": null
+        },
+        "config_profile_contact": {
+            "type": "string",
+            "default": null
+        },
+        "config_profile_url": {
+            "type": "string",
+            "default": null
+        },
+        "config_profile_name": {
+            "type": "string",
+            "default": null
+        }
+    }
 }

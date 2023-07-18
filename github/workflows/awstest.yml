@@ -7,7 +7,7 @@ on:
 jobs:
   run-tower:
     name: Run AWS tests
-    if: github.repository == 'elizabethmcd/reads2genome'
+    if: github.repository == 'Arcadia-Science/reads2genome'
     runs-on: ubuntu-latest
     steps:
       # Launch workflow using Tower CLI tool action

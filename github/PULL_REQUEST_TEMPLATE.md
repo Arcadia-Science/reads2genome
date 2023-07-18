@@ -1,7 +1,7 @@
 <!--
-# elizabethmcd/reads2genome pull request
+# Arcadia-Science/reads2genome pull request
 
-Many thanks for contributing to elizabethmcd/reads2genome!
+Many thanks for contributing to Arcadia-Science/reads2genome!
 
 Please fill in the appropriate checklist below (delete whatever is not relevant).
 These are the most common things requested on pull requests (PRs).
