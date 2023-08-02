@@ -13,15 +13,15 @@
             "properties": {
                 "input": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "outdir": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "platform": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 }
             },
             "required": ["input", "outdir", "platform"]
@@ -34,7 +34,7 @@
             "properties": {
                 "lineage": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "mode": {
                     "type": "string",
@@ -55,6 +55,10 @@
                     "fa_icon": "fas fa-envelope",
                     "help_text": "Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (`~/.nextflow/config`) then you don't need to specify this on the command line for every run.",
                     "pattern": "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
+                },
+                "from_email": {
+                    "type": "string",
+                    "default": "None"
                 }
             }
         },
@@ -172,19 +176,19 @@
             "properties": {
                 "multiqc_title": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "multiqc_methods_description": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "multiqc_logo": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "multiqc_config": {
                     "type": "string",
-                    "default": null
+                    "default": "None"
                 },
                 "max_multiqc_email_size": {
                     "type": "string",
@@ -214,13 +218,9 @@
         }
     ],
     "properties": {
-        "single_end": {
-            "type": "string",
-            "default": "false"
-        },
         "hook_url": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "custom_config_version": {
             "type": "string",
@@ -232,19 +232,19 @@
         },
         "config_profile_description": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "config_profile_contact": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "config_profile_url": {
             "type": "string",
-            "default": null
+            "default": "None"
         },
         "config_profile_name": {
             "type": "string",
-            "default": null
+            "default": "None"
         }
     }
 }

@@ -1,0 +1,79 @@
+name: Arcadia-Science/reads2genome CI
+# This workflow runs the pipeline with the minimal test dataset to check that it completes without any syntax errors
+on:
+  pull_request:
+  release:
+    types: [published]
+
+env:
+  NXF_ANSI_LOG: false
+
+jobs:
+  test_illumina:
+    name: Run Illumina pipeline with test data
+    # Only run on push if this is the nf-core dev branch (merged PRs)
+    if: "${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository == 'Arcadia-Science/reads2genome') }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        NXF_VER:
+          - "22.10.1"
+          - "latest-everything"
+    steps:
+      - name: Check out pipeline code
+        uses: actions/checkout@v2
+
+      - name: Install Nextflow
+        uses: nf-core/setup-nextflow@v1
+        with:
+          version: "${{ matrix.NXF_VER }}"
+
+      - name: Run Illumina pipeline with test data
+        run: |
+          nextflow run ${GITHUB_WORKSPACE} -profile test_illumina,docker --outdir ./results_illumina
+
+  test_nanopore:
+    name: Run Nanpore pipeline with test data
+    # Only run on push if this is the nf-core dev branch (merged PRs)
+    if: "${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository == 'Arcadia-Science/reads2genome') }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        NXF_VER:
+          - "22.10.1"
+          - "latest-everything"
+    steps:
+      - name: Check out pipeline code
+        uses: actions/checkout@v2
+
+      - name: Install Nextflow
+        uses: nf-core/setup-nextflow@v1
+        with:
+          version: "${{ matrix.NXF_VER }}"
+
+      - name: Run Nanopore pipeline with test data
+        run: |
+          nextflow run ${GITHUB_WORKSPACE} -profile test_nanopore,docker --outdir ./results_illumina
+
+  test_pacbio:
+    name: Run PacBio pipeline with test data
+    # Only run on push if this is the nf-core dev branch (merged PRs)
+    if: "${{ github.event_name != 'push' || (github.event_name == 'push' && github.repository == 'Arcadia-Science/reads2genome') }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        NXF_VER:
+          - "22.10.1"
+          - "latest-everything"
+    steps:
+      - name: Check out pipeline code
+        uses: actions/checkout@v2
+
+      - name: Install Nextflow
+        uses: nf-core/setup-nextflow@v1
+        with:
+          version: "${{ matrix.NXF_VER }}"
+
+      - name: Run PacBio pipeline with test data
+        run: |
+          nextflow run ${GITHUB_WORKSPACE} -profile test_pacbio,docker --outdir ./results_illumina
