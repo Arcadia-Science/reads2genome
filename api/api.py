@@ -23,6 +23,7 @@ def run_pipeline(uri: str, lineage: str = "chlorophyta_odb10", platform: str = "
             "from_email": os.environ["FROM_EMAIL"],
             "email": os.environ["NOTIFICATION_EMAIL"],
             "input": uri,
+            "outdir": "s3://nf-hifi2genome/2023-08-03-merttest",
             "lineage": lineage,
             "multiqc_title": multiqc_title,
             "platform": platform,
