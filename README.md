@@ -28,7 +28,7 @@ nextflow run Arcadia-Science/reads2genome -profile test_illumina,YOURPROFILE --o
 ```
 
 ```
-nextflow run Arcadia-Science/metagenomics -profile test_nanopore,YOURPROFILE --outdir <OUTDIR>
+nextflow run Arcadia-Science/reads2genome -profile test_nanopore,YOURPROFILE --outdir <OUTDIR>
 ```
 
 ```
