@@ -8,7 +8,7 @@ At Arcadia, we deploy our Nextflow workflows through Nextflow Tower using our AW
 
 To specify certain processes to run via on-demand instances and all other processes in the workflow run via spot-instances, we setup queue directives in the config file. You can find the [Nextflow Tower documentation](https://help.tower.nf/22.3/faqs/?h=queue#queues) on this as well.
 
-Within Nextflow Tower, setup both a spot-instance compute environment and on-demand compute environment configured for running the workflow with access to the appropriate S3 buckets. For the on-demand computer environment, make sure to copy The "head queue" found in the manual config attributes of the compute environment setup.
+Within Nextflow Tower, setup both a spot-instance compute environment and on-demand compute environment configured for running the workflow with access to the appropriate S3 buckets. For the on-demand compute environment, make sure to copy The "head queue" found in the manual config attributes of the compute environment setup.
 
 When setting up the "Launchpad" of the workflow to add a pipeline, make your compute environment the one that has the spot instance provisioning model. This will ensure all processes by default run on spot instances.
 
