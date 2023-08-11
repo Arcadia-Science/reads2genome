@@ -51,6 +51,8 @@ Note that some form of configuration will be needed so that Nextflow knows how t
 nextflow run Arcadia-Science/reads2genome --input samplesheet.csv --outdir <OUTDIR> --platform <illumina|nanopore|pacbio> --lineage <BUSCO_LINEAGE> -profile <docker/singularity/conda/institute>
 ```
 
+For more documentation on [usage](docs/usage.md), [output](docs/output.md), and specifying [queue directives](docs/queues.md) in Tower for differentiating processes to run via spot or on-demand AWS Batch instances, see the [docs](docs/README.md).
+
 ## Citations
 
 This cookiecutter template is based off of the `nf-core` template. You can cite the `nf-core` publication as follows:
